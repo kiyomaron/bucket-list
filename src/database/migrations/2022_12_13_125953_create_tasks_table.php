@@ -15,12 +15,11 @@ return new class extends Migration
     {
         Schema::create('tasks', function (Blueprint $table) {
             $table->id('task_id');
-            $table->timestamp('created_at');
-            $table->timestamp('updated_at');
+            $table->timestamps();
             $table->integer('user_id');
-            $table->string('title',255);
+            $table->string('title',256);
             $table->datetime('ideal_goal_on');
-            $table->boolean('is_achieved');
+            $table->boolean('is_achieved')->default(0);
 
         });
     }
