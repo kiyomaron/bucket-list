@@ -14,7 +14,7 @@ class TaskTest extends TestCase
     /**
      * @test
      */
-    public function 一覧を取得()
+    public function 一覧を取得できる()
     {
         $tasks = Task::factory()->count(10)->create();
         // dd($tasks->toArray());
@@ -24,5 +24,23 @@ class TaskTest extends TestCase
         $response
             ->assertOk()
             ->assertJsonCount($tasks->count(10));
+    }
+
+    /**
+     * @test
+     */
+    public function 登録することができる()
+    {
+        $data = [
+            'title' => 'テスト投稿',
+            'user_id' => 2,
+            'ideal_goal_on' => '2023-01-30 10:00:00'
+        ];
+        $response = $this->postJson('api/tasks', $data);
+
+        // dd($response->json());
+        $response
+            ->assertCreated()
+            ->assertJsonFragment($data);
     }
 }

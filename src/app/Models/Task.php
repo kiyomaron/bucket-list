@@ -14,6 +14,6 @@ class Task extends Model
     protected $fillable = [
         'title',
         'ideal_goal_on',
-        'is_achieved'
+        'user_id'
     ];
 }

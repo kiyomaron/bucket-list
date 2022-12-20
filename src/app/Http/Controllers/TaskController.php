@@ -16,4 +16,18 @@ class TaskController extends Controller
     {
         return Task::orderByDesc('task_id')->get();
     }
+
+    /**
+     * タスク登録
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     *  */
+    public function store(Request $request)
+    {
+        $task = Task::create($request->all());
+
+        return $task
+            ? response()->json($task, 201)
+            : response()->json([], 500);
+    }
 }
