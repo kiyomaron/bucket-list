@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tasks', function (Blueprint $table) {
-            $table->id('task_id');
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
-            $table->integer('user_id');
-            $table->string('title',256);
-            $table->datetime('ideal_goal_on');
-            $table->boolean('is_achieved')->default(0);
-
+            $table->string('title', 256);
+            $table->smallInteger('is_achieved')->default(0);
+            $table->softDeletes($column = 'deleted_at', $precision = 0);
         });
     }
 
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tasks');
+        Schema::dropIfExists('posts');
     }
 };

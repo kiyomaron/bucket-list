@@ -27,3 +27,10 @@ Route::post('/tasks', function(Request $request) {
 Route::delete('/task/{task}', function(Task $task) {
     //
 });
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
