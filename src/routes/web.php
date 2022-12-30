@@ -15,12 +15,25 @@ use Illuminate\Support\Facades\Route;
 */
 /* リスト表示 */
 Route::get('/', function () {
-    return view('welcome');
+    return view('tasks');
 });
+// Route::get('/', [TaskController::class, 'index'])->name('task.index');
 
 /* タスク追加 */
 Route::post('/tasks', function(Request $request) {
-    // 
+    dd($request);
+
+    // validation
+    $validator = Validator::make($request->all(),[
+       'item_name' => 'required|max:255', 
+    ]);
+
+    // validation:error
+    if($validator->fails()) {
+        return redirect('/')
+            ->withInput()
+            ->withErrors($validator);
+    }
 });
 
 /*　タスクを削除 */
