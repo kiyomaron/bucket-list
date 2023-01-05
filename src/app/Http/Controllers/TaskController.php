@@ -56,9 +56,11 @@ class TaskController extends Controller
      * @param  \App\Models\Task  $task
      * @return \Illuminate\Http\Response
      */
-    public function show(Task $task)
+    public function show(Task $task, $id)
     {
-        //
+        $task = Task::findOrFail($id);
+
+        return view('tasks.show', compact('task'));
     }
 
     /**

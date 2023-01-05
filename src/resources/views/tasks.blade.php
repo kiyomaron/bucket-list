@@ -15,7 +15,7 @@
             <!--目標-->
             <div class="form-group">
                 <div class="col-sm-6">
-                    <input type="text" name="item_name" class="form-control">
+                    <input type="text" name="title" class="form-control">
                 </div>
             </div>
             
@@ -29,5 +29,42 @@
     </div>
 
     <!--登録されているリスト-->
+    @if (count($tasks) > 0)
+        <div class="card-body">
+            <div>
+                <table>
+                    <!--テーブルヘッダ-->
+                    <thead>
+                        <th>バケットリスト</th>
+                        <th>&nbsp;</th>
+                    </thead>
+                    <!--テーブル本体-->
+                    <tbody>
+                        @foreach ($tasks as $task)
+
+                            <tr>
+                                <!--タイトル-->
+                                <td class="table-text">
+                                    <div><a href="{{ route('tasks.show', $task) }}">{{ $task->title }}</a></div>
+                                </td>
+                                <!--削除ボタン-->
+                                <td>
+                                    <form action="{{ url('task/'.$task->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+
+                                        <button type="submit" class="btn btn-danger">
+                                            削除
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    @endif
 
 @endsection
